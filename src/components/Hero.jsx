@@ -7,11 +7,6 @@ const Hero = ({ activeSection, setActiveSection }) => {
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Smooth movement for parallax
-    const springConfig = { damping: 25, stiffness: 150 };
-    const rotateX = useSpring(useTransform(mouseY, [-300, 300], [10, -10]), springConfig);
-    const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-10, 10]), springConfig);
-
     const handleMouseMove = (e) => {
         if (!containerRef.current) return;
         const rect = containerRef.current.getBoundingClientRect();
@@ -86,59 +81,32 @@ const Hero = ({ activeSection, setActiveSection }) => {
                 </motion.div>
 
                 <motion.div
-                    style={{ rotateX, rotateY, perspective: 1000 }}
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1.2, delay: 0.2 }}
                     className="relative flex justify-center lg:justify-end"
                 >
-                    {/* Main Visual - Natural Hover Effect */}
-                    <motion.div 
-                        animate={{ 
-                            y: [0, -20, 0],
-                        }}
-                        transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                        className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 group"
-                    >
-                        {/* Outer rings with very slow rotation */}
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                            className="absolute inset-0 border-2 border-dashed border-cyber/20 rounded-full transition-colors duration-500 group-hover:border-cyber/40"
-                        />
-                        <motion.div
-                            animate={{ rotate: -360 }}
-                            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                            className="absolute -inset-6 border border-cyber/5 rounded-full"
-                        />
+                    <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96">
+                        {/* Static outer rings */}
+                        <div className="absolute inset-0 border-2 border-dashed border-cyber/20 rounded-full" />
+                        <div className="absolute -inset-6 border border-cyber/5 rounded-full" />
 
                         <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-cyber/30 p-2 glow-shadow bg-cyber-bg/50 backdrop-blur-sm">
                             <img
                                 src="images/me.jpg"
                                 alt="Branel Accrombessy"
-                                className="w-full h-full object-cover rounded-full mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-1000 group-hover:scale-110"
+                                className="w-full h-full object-cover rounded-full"
                                 onError={(e) => {
                                     e.target.src = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800";
                                 }}
                             />
-                            {/* Gentle scan line */}
-                            <motion.div
-                                initial={{ top: "-10%", opacity: 0 }}
-                                animate={{ top: ["0%", "100%", "0%"], opacity: [0, 0.5, 0] }}
-                                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                                className="absolute left-0 right-0 h-[2px] bg-cyber/30 shadow-[0_0_15px_rgba(0,212,255,0.5)] z-10"
-                            />
                         </div>
 
-                        {/* Interactive floating items */}
+                        {/* Interactive floating items - kept as they are secondary to the photo itself */}
                         <FloatingBadge icon={Shield} text="Security" className="-top-4 -left-4" mouseX={mouseX} mouseY={mouseY} factor={-0.12} />
                         <FloatingBadge icon={Code2} text="Code" className="bottom-0 -right-4 md:-right-8" mouseX={mouseX} mouseY={mouseY} factor={0.18} />
                         <FloatingBadge icon={Cpu} text="Robotics" className="top-1/2 -right-8 md:-right-12" mouseX={mouseX} mouseY={mouseY} factor={0.1} />
-                    </motion.div>
+                    </div>
                 </motion.div>
             </div>
         </section>
