@@ -1,7 +1,25 @@
 import { motion } from 'framer-motion';
 import { Code2, Shield, Cpu, Terminal, Sparkles, Globe, Laptop, Smartphone, Database, Box } from 'lucide-react';
+import { useState } from 'react';
 
 const Sections = ({ activeSection }) => {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const mailtoUrl = `mailto:kissbranel@gmail.com?subject=${encodeURIComponent(formData.subject || 'Contact Portfolio')}&body=${encodeURIComponent(`Nom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+        window.location.href = mailtoUrl;
+    };
+
+    const handleChange = (e) => {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
     return (
         <div className="max-w-7xl mx-auto px-4 md:px-8 py-20 pb-40 space-y-32 md:space-y-40">
             {/* About Section */}
@@ -156,17 +174,40 @@ const Sections = ({ activeSection }) => {
                         <h2 className="text-3xl md:text-4xl font-black mb-4">LANCER UNE CONNEXION</h2>
                         <p className="text-white/40 text-sm md:text-base">Disponible pour des projets innovants et collaborations technologiques.</p>
                     </div>
-                    <form className="space-y-4 md:space-y-6">
+                    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                            <HUDInput placeholder="NOM" />
-                            <HUDInput placeholder="VOTRE EMAIL" />
+                            <HUDInput 
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                                placeholder="NOM" 
+                                required
+                            />
+                            <HUDInput 
+                                name="email"
+                                type="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                placeholder="VOTRE EMAIL" 
+                                required
+                            />
                         </div>
-                        <HUDInput placeholder="SUJET" />
+                        <HUDInput 
+                            name="subject"
+                            value={formData.subject}
+                            onChange={handleChange}
+                            placeholder="SUJET" 
+                        />
                         <textarea
+                            name="message"
+                            value={formData.message}
+                            onChange={handleChange}
                             className="w-full bg-white/5 border border-white/10 p-4 md:p-6 rounded-2xl focus:border-cyber outline-none min-h-[120px] md:min-h-[150px] transition-all text-sm"
                             placeholder="MESSAGE DE TRANSMISSION..."
+                            required
                         />
                         <motion.button
+                            type="submit"
                             whileHover={{ scale: 1.02 }}
                             whileTap={{ scale: 0.98 }}
                             className="w-full bg-white text-black py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-cyber transition-all text-sm md:text-base"

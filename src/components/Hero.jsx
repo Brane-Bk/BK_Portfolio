@@ -9,8 +9,8 @@ const Hero = ({ activeSection, setActiveSection }) => {
 
     // Smooth movement for parallax
     const springConfig = { damping: 25, stiffness: 150 };
-    const rotateX = useSpring(useTransform(mouseY, [-300, 300], [15, -15]), springConfig);
-    const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-15, 15]), springConfig);
+    const rotateX = useSpring(useTransform(mouseY, [-300, 300], [10, -10]), springConfig);
+    const rotateY = useSpring(useTransform(mouseX, [-300, 300], [-10, 10]), springConfig);
 
     const handleMouseMove = (e) => {
         if (!containerRef.current) return;
@@ -71,14 +71,17 @@ const Hero = ({ activeSection, setActiveSection }) => {
                             Explorer les Projets
                             <Cpu size={20} />
                         </motion.button>
-                        <motion.button
+                        <motion.a
+                            href="/img.png"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
                             whileTap={{ scale: 0.95 }}
-                            className="border-2 border-white/20 px-6 md:px-8 py-3 md:py-4 rounded-full font-bold uppercase tracking-widest flex items-center gap-3 text-sm md:text-base"
+                            className="border-2 border-white/20 px-6 md:px-8 py-3 md:py-4 rounded-full font-bold uppercase tracking-widest flex items-center gap-3 text-sm md:text-base cursor-pointer no-underline text-white"
                         >
                             CV / Profile
                             <Shield size={20} />
-                        </motion.button>
+                        </motion.a>
                     </div>
                 </motion.div>
 
@@ -89,40 +92,53 @@ const Hero = ({ activeSection, setActiveSection }) => {
                     transition={{ duration: 1.2, delay: 0.2 }}
                     className="relative flex justify-center lg:justify-end"
                 >
-                    {/* Main Visual - Interactive Effect */}
-                    <div className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 group">
+                    {/* Main Visual - Natural Hover Effect */}
+                    <motion.div 
+                        animate={{ 
+                            y: [0, -20, 0],
+                        }}
+                        transition={{
+                            duration: 6,
+                            repeat: Infinity,
+                            ease: "easeInOut"
+                        }}
+                        className="relative w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 group"
+                    >
+                        {/* Outer rings with very slow rotation */}
                         <motion.div
-                            whileHover={{ rotate: 180, scale: 1.1 }}
-                            className="absolute inset-0 border-2 border-dashed border-cyber/30 rounded-full transition-colors duration-500 group-hover:border-cyber/60"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                            className="absolute inset-0 border-2 border-dashed border-cyber/20 rounded-full transition-colors duration-500 group-hover:border-cyber/40"
                         />
                         <motion.div
-                            whileHover={{ rotate: -180, scale: 1.15 }}
-                            className="absolute -inset-4 border border-cyber/10 rounded-full"
+                            animate={{ rotate: -360 }}
+                            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                            className="absolute -inset-6 border border-cyber/5 rounded-full"
                         />
 
-                        <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-cyber/50 p-2 glow-shadow bg-cyber-bg/50">
+                        <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-cyber/30 p-2 glow-shadow bg-cyber-bg/50 backdrop-blur-sm">
                             <img
                                 src="images/me.jpg"
                                 alt="Branel Accrombessy"
-                                className="w-full h-full object-cover rounded-full mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-700 group-hover:scale-105"
+                                className="w-full h-full object-cover rounded-full mix-blend-luminosity group-hover:mix-blend-normal transition-all duration-1000 group-hover:scale-110"
                                 onError={(e) => {
                                     e.target.src = "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800";
                                 }}
                             />
-                            {/* Scanning line triggers only on hover */}
+                            {/* Gentle scan line */}
                             <motion.div
-                                initial={{ top: "-10%" }}
-                                whileHover={{ top: ["0%", "100%", "0%"] }}
-                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                                className="absolute left-0 right-0 h-1 bg-cyber/50 shadow-[0_0_15px_rgba(0,212,255,1)] z-10 opacity-0 group-hover:opacity-100 transition-opacity"
+                                initial={{ top: "-10%", opacity: 0 }}
+                                animate={{ top: ["0%", "100%", "0%"], opacity: [0, 0.5, 0] }}
+                                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                                className="absolute left-0 right-0 h-[2px] bg-cyber/30 shadow-[0_0_15px_rgba(0,212,255,0.5)] z-10"
                             />
                         </div>
 
-                        {/* Interactive floating items - move with parallax */}
-                        <FloatingBadge icon={Shield} text="Security" className="-top-4 -left-4" mouseX={mouseX} mouseY={mouseY} factor={-0.1} />
-                        <FloatingBadge icon={Code2} text="Code" className="bottom-0 -right-4 md:-right-8" mouseX={mouseX} mouseY={mouseY} factor={0.15} />
-                        <FloatingBadge icon={Cpu} text="Robotics" className="top-1/2 -right-8 md:-right-12" mouseX={mouseX} mouseY={mouseY} factor={0.08} />
-                    </div>
+                        {/* Interactive floating items */}
+                        <FloatingBadge icon={Shield} text="Security" className="-top-4 -left-4" mouseX={mouseX} mouseY={mouseY} factor={-0.12} />
+                        <FloatingBadge icon={Code2} text="Code" className="bottom-0 -right-4 md:-right-8" mouseX={mouseX} mouseY={mouseY} factor={0.18} />
+                        <FloatingBadge icon={Cpu} text="Robotics" className="top-1/2 -right-8 md:-right-12" mouseX={mouseX} mouseY={mouseY} factor={0.1} />
+                    </motion.div>
                 </motion.div>
             </div>
         </section>
@@ -130,13 +146,13 @@ const Hero = ({ activeSection, setActiveSection }) => {
 };
 
 const FloatingBadge = ({ icon: Icon, text, className, mouseX, mouseY, factor = 0.1 }) => {
-    const tx = useSpring(useTransform(mouseX, [-300, 300], [-30 * factor, 30 * factor]));
-    const ty = useSpring(useTransform(mouseY, [-300, 300], [-30 * factor, 30 * factor]));
+    const tx = useSpring(useTransform(mouseX, [-300, 300], [-40 * factor, 40 * factor]));
+    const ty = useSpring(useTransform(mouseY, [-300, 300], [-40 * factor, 40 * factor]));
 
     return (
         <motion.div
             style={{ x: tx, y: ty }}
-            whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.1)" }}
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(255, 255, 255, 0.15)" }}
             className={`absolute glass p-3 md:p-4 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3 z-20 cursor-pointer ${className}`}
         >
             <div className="bg-cyber/20 p-1.5 md:p-2 rounded-lg">
