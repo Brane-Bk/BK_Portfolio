@@ -37,11 +37,38 @@ const Sections = ({ activeSection }) => {
                             <h2 className="text-3xl font-bold uppercase tracking-widest">Parcours</h2>
                         </div>
                         <div className="space-y-4">
+                        <TimelineItem
+                                year="2026"
+                                title="Développement Mobile – Niveau Avancé"
+                                subtitle="Organisation Internationale de la Francophonie (OIF) – D-CLIC"
+                                detail="Formation professionnalisante de 60h en Flutter & Dart (UI avancées, Firebase, API REST, gestion d’état, optimisation, tests). Attestation obtenue le 3 février 2026."
+                            />
+                            <TimelineItem
+                                year="2025"
+                                title="NASA International Space Apps Challenge – Galactic Problem Solver"
+                                subtitle="NASA Space Apps Challenge"
+                                detail="Certificat de participation pour contribution exceptionnelle. Global Nominee au niveau international (October 4–5, 2025)."
+                            />
+
+                            <TimelineItem
+                                year="2025"
+                                title="Initiation à la Programmation Python & Machine Learning"
+                                subtitle="Bénin Excellence / Fondation Vallet"
+                                detail="Formation au laboratoire d’intelligence artificielle : bases Python, manipulation de données, introduction au Machine Learning. Octobre 2024 – Juin 2025."
+                            />
+
+
                             <TimelineItem
                                 year="2025"
                                 title="Bac + 1 Maths Info Appliquée"
                                 subtitle="Université d'Abomey-Calavi"
                                 detail="FACULTE DES SCIENCES ET TECHNIQUES"
+                            />
+                              <TimelineItem
+                                year="2025"
+                                title="Bac + 1 ANGLAIS"
+                                subtitle="Université d'Abomey-Calavi"
+                                detail="FACULTE DES LETTRES LANGUES ARTS ET COMMUNICATION"
                             />
                             <TimelineItem
                                 year="2023"
