@@ -108,7 +108,7 @@ const Sections = ({ activeSection }) => {
                     <SkillCard
                         icon={Code2}
                         title="Dev Web & Apps"
-                        skills={["HTML", "CSS", "JS", "React", "Python", "Flutter"]}
+                        skills={["HTML", "CSS", "JS","C", "React", "Python", "Flutter"]}
                         color="text-blue-400"
                     />
                     <SkillCard
