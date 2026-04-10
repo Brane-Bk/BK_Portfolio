@@ -9,10 +9,17 @@
 body {
   @apply bg-slate-950 text-white overflow-x-hidden;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  scroll-behavior: smooth;
 }
 
 .glass {
   @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.1);
+  border-color: rgba(0, 212, 255, 0.3);
 }
 
 .text-gradient {

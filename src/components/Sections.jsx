@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Code2, Shield, Cpu, Terminal, Sparkles, Globe, Laptop, Smartphone, Database, Box } from 'lucide-react';
+import { Code2, Shield, Cpu, Terminal, Sparkles, Globe, Laptop, Smartphone, Database, Box, MessageCircle, Award, FileText, Image as ImageIcon } from 'lucide-react';
 import { useState } from 'react';
 
 const Sections = ({ activeSection }) => {
@@ -9,12 +9,6 @@ const Sections = ({ activeSection }) => {
         subject: '',
         message: ''
     });
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const mailtoUrl = `mailto:kissbranel@gmail.com?subject=${encodeURIComponent(formData.subject || 'Contact Portfolio')}&body=${encodeURIComponent(`Nom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-        window.location.href = mailtoUrl;
-    };
 
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,20 +46,40 @@ const Sections = ({ activeSection }) => {
                     <div>
                         <div className="flex items-center gap-3 mb-4">
                             <span className="h-[2px] w-8 bg-cyber" />
-                            <h2 className="text-3xl font-bold uppercase tracking-widest">Parcours</h2>
+                            <h2 className="text-3xl font-bold uppercase tracking-widest">Parcours & Certificats</h2>
                         </div>
-                        <div className="space-y-4">
-                        <TimelineItem
+                        <div className="space-y-6">
+                            <TimelineItem
                                 year="2026"
                                 title="Développement Mobile – Niveau Avancé"
                                 subtitle="Organisation Internationale de la Francophonie (OIF) – D-CLIC"
                                 detail="Formation professionnalisante de 60h en Flutter & Dart (UI avancées, Firebase, API REST, gestion d’état, optimisation, tests). Attestation obtenue le 3 février 2026."
+                                certLinks={[
+                                    { name: "Attestation N1", link: "/Certifications/Attestation_de_formationN1.pdf" },
+                                    { name: "Attestation N2", link: "/Certifications/Attestation_de_formationN2.pdf" },
+                                    { name: "Attestation N3", link: "/Certifications/Attestation_de_formationN3.pdf" }
+                                ]}
                             />
+
                             <TimelineItem
                                 year="2025"
-                                title="NASA International Space Apps Challenge – Galactic Problem Solver"
-                                subtitle="NASA Space Apps Challenge"
+                                title="Développement Logiciel & Tech"
+                                subtitle="Certifications Avancées"
+                                detail="Certificats professionnels de complétion attestant de mes compétences de développement web et logiciel."
+                                certLinks={[
+                                    { name: "Certificat Pro", link: "/Certifications/certificate%20fata%20dev.pdf" },
+                                    { name: "Certificat Complétion", link: "/Certifications/Completion%20PMi%20projet%20management.png" }
+                                ]}
+                            />
+
+                            <TimelineItem
+                                year="2025"
+                                title="NASA International Space Apps Challenge"
+                                subtitle="Galactic Problem Solver"
                                 detail="Certificat de participation pour contribution exceptionnelle. Global Nominee au niveau international (October 4–5, 2025)."
+                                certLinks={[
+                                    { name: "Certificat NASA", link: "/Certifications/NASA%20Space%20Apps%20Challenge.pdf" }
+                                ]}
                             />
 
                             <TimelineItem
@@ -73,8 +87,10 @@ const Sections = ({ activeSection }) => {
                                 title="Initiation à la Programmation Python & Machine Learning"
                                 subtitle="Bénin Excellence / Fondation Vallet"
                                 detail="Formation au laboratoire d’intelligence artificielle : bases Python, manipulation de données, introduction au Machine Learning. Octobre 2024 – Juin 2025."
+                                certLinks={[
+                                    { name: "Attestation Python & ML", link: "/Certifications/PROGRAMMATION%20ET%20ML-2.pdf" }
+                                ]}
                             />
-
 
                             <TimelineItem
                                 year="2025"
@@ -82,7 +98,7 @@ const Sections = ({ activeSection }) => {
                                 subtitle="Université d'Abomey-Calavi"
                                 detail="FACULTE DES SCIENCES ET TECHNIQUES"
                             />
-                              <TimelineItem
+                            <TimelineItem
                                 year="2025"
                                 title="Bac + 1 ANGLAIS"
                                 subtitle="Université d'Abomey-Calavi"
@@ -90,7 +106,7 @@ const Sections = ({ activeSection }) => {
                             />
                             <TimelineItem
                                 year="2023"
-                                title="Bac C Mention Abien"
+                                title="Bac C (Mention A. Bien)"
                                 subtitle="Baccalauréat Scientifique"
                             />
                         </div>
@@ -108,7 +124,7 @@ const Sections = ({ activeSection }) => {
                     <SkillCard
                         icon={Code2}
                         title="Dev Web & Apps"
-                        skills={["HTML", "CSS", "JS","C", "React", "Python", "Flutter"]}
+                        skills={["HTML", "CSS", "JS", "C", "React", "Python", "Flutter"]}
                         color="text-blue-400"
                     />
                     <SkillCard
@@ -142,9 +158,9 @@ const Sections = ({ activeSection }) => {
                         icon={Sparkles}
                     />
                     <ProjectCard
-                        title="Mini-apps Web & Mobile"
-                        tags={["React", "Flutter", "Python"]}
-                        desc="Série d'applications utilitaires développées en autodidacte."
+                        title="Vortex Store (Apps & Sites)"
+                        tags={["APK", "Web", "Store"]}
+                        desc="Développement intensif d'APK mobiles et de sites web innovants. Je publierai bientôt un accès direct à mon store privé regroupant l'ensemble de mes créations."
                         icon={Smartphone}
                     />
                     <ProjectCard
@@ -174,29 +190,30 @@ const Sections = ({ activeSection }) => {
                         <h2 className="text-3xl md:text-4xl font-black mb-4">LANCER UNE CONNEXION</h2>
                         <p className="text-white/40 text-sm md:text-base">Disponible pour des projets innovants et collaborations technologiques.</p>
                     </div>
-                    <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                    <form action="https://formsubmit.co/kissbranel@gmail.com" method="POST" className="space-y-4 md:space-y-6">
+                        <input type="hidden" name="_subject" value="Nouveau contact depuis le portfolio !" />
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                            <HUDInput 
+                            <HUDInput
                                 name="name"
                                 value={formData.name}
                                 onChange={handleChange}
-                                placeholder="NOM" 
+                                placeholder="NOM"
                                 required
                             />
-                            <HUDInput 
+                            <HUDInput
                                 name="email"
                                 type="email"
                                 value={formData.email}
                                 onChange={handleChange}
-                                placeholder="VOTRE EMAIL" 
+                                placeholder="VOTRE EMAIL"
                                 required
                             />
                         </div>
-                        <HUDInput 
+                        <HUDInput
                             name="subject"
                             value={formData.subject}
                             onChange={handleChange}
-                            placeholder="SUJET" 
+                            placeholder="SUJET"
                         />
                         <textarea
                             name="message"
@@ -215,6 +232,23 @@ const Sections = ({ activeSection }) => {
                             Envoyer Message
                         </motion.button>
                     </form>
+
+                    <div className="mt-6">
+                        <a
+                            href="https://wa.me/2290140138597"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <motion.button
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                className="flex items-center justify-center gap-3 w-full bg-[#25D366]/10 text-[#25D366] border border-[#25D366]/30 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-[#25D366]/20 transition-all text-sm md:text-base"
+                            >
+                                <MessageCircle size={20} />
+                                Contacter sur WhatsApp
+                            </motion.button>
+                        </a>
+                    </div>
                 </motion.div>
             </section>
         </div>
@@ -228,12 +262,21 @@ const InfoItem = ({ label, value }) => (
     </div>
 );
 
-const TimelineItem = ({ year, title, subtitle, detail }) => (
+const TimelineItem = ({ year, title, subtitle, detail, certLinks }) => (
     <div className="glass p-6 rounded-2xl border-l-4 border-l-cyber">
         <span className="text-cyber font-mono font-bold">{year}</span>
         <h3 className="text-xl font-bold mt-1 uppercase tracking-tight">{title}</h3>
         <p className="text-white/60 text-sm mt-1">{subtitle}</p>
-        {detail && <p className="text-white/40 text-[10px] font-mono mt-2 uppercase">{detail}</p>}
+        {detail && <p className="text-white/40 text-[10px] font-mono mt-2 uppercase leading-relaxed">{detail}</p>}
+        {certLinks && certLinks.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+                {certLinks.map((cert, idx) => (
+                    <a key={idx} href={cert.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-cyber/10 rounded-lg text-[10px] uppercase font-bold text-cyber hover:bg-cyber hover:text-black transition-all border border-cyber/30">
+                        <FileText size={12} /> {cert.name}
+                    </a>
+                ))}
+            </div>
+        )}
     </div>
 );
 

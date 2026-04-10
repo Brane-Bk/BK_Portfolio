@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
-import { Shield, Cpu, Code2 } from 'lucide-react';
+import { Shield, Cpu, Code2, Github } from 'lucide-react';
 import { useRef } from 'react';
 
 const Hero = ({ activeSection, setActiveSection }) => {
@@ -76,6 +76,16 @@ const Hero = ({ activeSection, setActiveSection }) => {
                         >
                             CV / Profile
                             <Shield size={20} />
+                        </motion.a>
+                        <motion.a
+                            href="https://github.com/branelAccrombessy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ scale: 1.05, backgroundColor: "rgba(255, 255, 255, 0.1)", boxShadow: "0 0 20px rgba(255,255,255,0.2)" }}
+                            whileTap={{ scale: 0.95 }}
+                            className="bg-white/5 border border-white/20 p-3 md:p-4 rounded-full flex items-center justify-center cursor-pointer text-white hover:text-cyber transition-all duration-300"
+                        >
+                            <Github size={20} />
                         </motion.a>
                     </div>
                 </motion.div>
